@@ -1729,6 +1729,7 @@ namespace Nop.Web.Areas.Admin.Controllers
             model.SeoSettings.CanonicalUrlsEnabled = seoSettings.CanonicalUrlsEnabled;
             model.SeoSettings.WwwRequirement = (int)seoSettings.WwwRequirement;
             model.SeoSettings.WwwRequirementValues = seoSettings.WwwRequirement.ToSelectList();
+            model.SeoSettings.MoveInlineJsToFooter = seoSettings.MoveInlineJsToFooter;
             model.SeoSettings.EnableJsBundling = seoSettings.EnableJsBundling;
             model.SeoSettings.EnableCssBundling = seoSettings.EnableCssBundling;
             model.SeoSettings.TwitterMetaTags = seoSettings.TwitterMetaTags;
@@ -1746,6 +1747,7 @@ namespace Nop.Web.Areas.Admin.Controllers
                 model.SeoSettings.ConvertNonWesternChars_OverrideForStore = _settingService.SettingExists(seoSettings, x => x.ConvertNonWesternChars, storeScope);
                 model.SeoSettings.CanonicalUrlsEnabled_OverrideForStore = _settingService.SettingExists(seoSettings, x => x.CanonicalUrlsEnabled, storeScope);
                 model.SeoSettings.WwwRequirement_OverrideForStore = _settingService.SettingExists(seoSettings, x => x.WwwRequirement, storeScope);
+                model.SeoSettings.MoveInlineJsToFooter_OverrideForStore = _settingService.SettingExists(seoSettings, x => x.MoveInlineJsToFooter, storeScope);
                 model.SeoSettings.EnableJsBundling_OverrideForStore = _settingService.SettingExists(seoSettings, x => x.EnableJsBundling, storeScope);
                 model.SeoSettings.EnableCssBundling_OverrideForStore = _settingService.SettingExists(seoSettings, x => x.EnableCssBundling, storeScope);
                 model.SeoSettings.TwitterMetaTags_OverrideForStore = _settingService.SettingExists(seoSettings, x => x.TwitterMetaTags, storeScope);
@@ -1901,6 +1903,7 @@ namespace Nop.Web.Areas.Admin.Controllers
             seoSettings.ConvertNonWesternChars = model.SeoSettings.ConvertNonWesternChars;
             seoSettings.CanonicalUrlsEnabled = model.SeoSettings.CanonicalUrlsEnabled;
             seoSettings.WwwRequirement = (WwwRequirement)model.SeoSettings.WwwRequirement;
+            seoSettings.MoveInlineJsToFooter = model.SeoSettings.MoveInlineJsToFooter;
             seoSettings.EnableJsBundling = model.SeoSettings.EnableJsBundling;
             seoSettings.EnableCssBundling = model.SeoSettings.EnableCssBundling;
             seoSettings.TwitterMetaTags = model.SeoSettings.TwitterMetaTags;
@@ -1920,6 +1923,7 @@ namespace Nop.Web.Areas.Admin.Controllers
             _settingService.SaveSettingOverridablePerStore(seoSettings, x => x.CanonicalUrlsEnabled, model.SeoSettings.CanonicalUrlsEnabled_OverrideForStore, storeScope, false);
             _settingService.SaveSettingOverridablePerStore(seoSettings, x => x.WwwRequirement, model.SeoSettings.WwwRequirement_OverrideForStore, storeScope, false);
             _settingService.SaveSettingOverridablePerStore(seoSettings, x => x.EnableJsBundling, model.SeoSettings.EnableJsBundling_OverrideForStore, storeScope, false);
+            _settingService.SaveSettingOverridablePerStore(seoSettings, x => x.MoveInlineJsToFooter, model.SeoSettings.MoveInlineJsToFooter_OverrideForStore, storeScope, false);
             _settingService.SaveSettingOverridablePerStore(seoSettings, x => x.EnableCssBundling, model.SeoSettings.EnableCssBundling_OverrideForStore, storeScope, false);
             _settingService.SaveSettingOverridablePerStore(seoSettings, x => x.TwitterMetaTags, model.SeoSettings.TwitterMetaTags_OverrideForStore, storeScope, false);
             _settingService.SaveSettingOverridablePerStore(seoSettings, x => x.OpenGraphMetaTags, model.SeoSettings.OpenGraphMetaTags_OverrideForStore, storeScope, false);

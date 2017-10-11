@@ -175,7 +175,7 @@
                                 @*fine uploader container*@
                                 <div id="@(controlId)uploader"></div>
                                 @*fine uploader template (keep it synchronized to \Content\fineuploader\templates\default.html)*@
-                                <script type="text/template" id="@(controlId)-qq-template">
+                                <script type="text/template" asp-location="Foot" id="@(controlId)-qq-template">
                                     <div class="qq-uploader-selector qq-uploader">
                                         <div class="qq-upload-drop-area-selector qq-upload-drop-area" qq-hide-dropzone>
                                             <span>@T("Common.FileUploader.DropFiles")</span>
@@ -205,7 +205,7 @@
                                         </ul>
                                     </div>
                                 </script>
-                                <script type="text/javascript">
+                                <script type="text/javascript" asp-location="Foot">
                                     $(document).ready(function() {
                                         $("#@(controlId)uploader").fineUploader({
                                             request: {
@@ -279,7 +279,7 @@
                                         <input type="text" name="@(controlId)_@(attributeValue.Id)_qty" id="@(controlId)_@(attributeValue.Id)_qty" value="@(attributeValue.Quantity)" />
                                     </div>
                                 }
-                                <script type="text/javascript">
+                                <script type="text/javascript" asp-location="Foot">
                                     $(document).ready(function() {
                                         $('.attributes #color-squares-@(attribute.Id)').delegate('input', 'click', function(event) {
                                             $('.attributes #color-squares-@(attribute.Id)').find('li').removeClass('selected-value');
@@ -320,7 +320,7 @@
                                         <input type="text" name="@(controlId)_@(attributeValue.Id)_qty" id="@(controlId)_@(attributeValue.Id)_qty" value="@(attributeValue.Quantity)" />
                                     </div>
                                 }
-                                <script type="text/javascript">
+                                <script type="text/javascript" asp-location="Foot">
                                     $(document).ready(function() {
                                         $('.attributes #image-squares-@(attribute.Id)').delegate('input', 'click', function(event) {
                                             $('.attributes #image-squares-@(attribute.Id)').find('li').removeClass('selected-value');
@@ -335,7 +335,7 @@
                 </dd>
             }
         </dl>
-        <script>
+        <script type="text/javascript" asp-location="Foot">
             function showHideDropdownQuantity(id) {
                 $('select[name=' + id + '] > option').each(function() {
                     $('#' + id + '_' + this.value + '_qty_box').hide();
@@ -411,7 +411,7 @@
 
         //render scripts
         //almost the same implementation is used in the \Views\Product\_RentalInfo.cshtml file
-        <script type="text/javascript">
+        <script type="text/javascript" asp-location="Foot">
             function @(attributeChangeHandlerFuncName)() {
                 $.ajax({
                     cache: false,
