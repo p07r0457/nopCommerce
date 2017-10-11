@@ -8,9 +8,9 @@
 <div class="master-wrapper-page">
     @await Component.InvokeAsync("AdminHeaderLinks")
     @await Html.PartialAsync("_Header")
-    <script type="text/javascript">
+    <nop-inline-script asp-location="Footer">
         AjaxCart.init(false, '.header-links .cart-qty', '.header-links .wishlist-qty', '#flyout-cart');
-    </script>
+    </nop-inline-script>
     <div class="header-menu">
         @await Component.InvokeAsync("TopMenu")
     </div>
