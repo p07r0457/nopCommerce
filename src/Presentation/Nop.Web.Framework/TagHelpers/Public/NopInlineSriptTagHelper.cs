@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using System;
+using Microsoft.AspNetCore.Html;
+using Nop.Core.Domain.Seo;
 using Nop.Web.Framework.UI;
 
 namespace Nop.Web.Framework.TagHelpers.Public
@@ -14,6 +16,7 @@ namespace Nop.Web.Framework.TagHelpers.Public
     {
         private const string LocationAttributeName = "asp-location";
         private readonly IHtmlHelper _htmlHelper;
+        private readonly SeoSettings _seoSettings;
 
         /// <summary>
         /// Indicates where the script should be rendered
@@ -28,9 +31,10 @@ namespace Nop.Web.Framework.TagHelpers.Public
         [ViewContext]
         public ViewContext ViewContext { get; set; }
 
-        public NopInlineSriptTagHelper(IHtmlHelper htmlHelper)
+        public NopInlineSriptTagHelper(IHtmlHelper htmlHelper, SeoSettings seoSettings)
         {
-            _htmlHelper = htmlHelper;
+            this._htmlHelper = htmlHelper;
+            this._seoSettings = seoSettings;
         }
 
         public override void Process(TagHelperContext context, TagHelperOutput output)
@@ -49,8 +53,15 @@ namespace Nop.Web.Framework.TagHelpers.Public
             var viewContextAware = _htmlHelper as IViewContextAware;
             viewContextAware?.Contextualize(ViewContext);
 
-            //get javascript
+            //get JavaScript
             var script = output.GetChildContentAsync().Result.GetContent();
+
+            if (!_seoSettings.MoveInlineJsToFooter)
+            {
+                output.SuppressOutput();
+                output.Content.SetHtmlContent(new HtmlString(script));
+                return;
+            }
 
             _htmlHelper.AppendInlineScriptParts(Location, script);
 

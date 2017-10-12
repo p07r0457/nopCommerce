@@ -31,7 +31,6 @@
         && (!storeInformationSettings.DisplayMiniProfilerForAdminOnly || permissionService.Authorize(StandardPermissionProvider.AccessAdminPanel));
 }
 <!DOCTYPE html>
-<nop-inline-script-manager>
 <html @(this.ShouldUseRtlTheme() ? Html.Raw(" dir=\"rtl\"") : null) @Html.NopPageCssClasses()>
     <head>
         <title>@Html.NopTitle()</title>

@@ -6513,6 +6513,12 @@
   <LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.Logo.Hint">
     <Value>Upload your store logo. If not uploaded, then the default one will be used.</Value>
   </LocaleResource>
+  <LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.MoveInlineJsToFooter">
+    <Value>Move inline JavaScript to the footer</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.MoveInlineJsToFooter.Hint">
+    <Value>Enable to move inline JavaScript to the footer (in some cases a developer can decide to move it to the header). It allows to significantly increase site speed because usually inline scripts are render blocking.</Value>
+  </LocaleResource>
   <LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.OpenGraphMetaTags">
     <Value>Open Graph META tags</Value>
   </LocaleResource>

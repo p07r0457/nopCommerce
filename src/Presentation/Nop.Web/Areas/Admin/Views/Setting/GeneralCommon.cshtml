@@ -411,6 +411,16 @@
                         </div>
                         <div class="form-group advanced-setting">
                             <div class="col-md-3">
+                                <nop-override-store-checkbox asp-for="SeoSettings.MoveInlineJsToFooter_OverrideForStore" asp-input="SeoSettings.MoveInlineJsToFooter" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />
+                                <nop-label asp-for="SeoSettings.MoveInlineJsToFooter" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="SeoSettings.MoveInlineJsToFooter" />
+                                <span asp-validation-for="SeoSettings.MoveInlineJsToFooter"></span>
+                            </div>
+                        </div>
+                        <div class="form-group advanced-setting">
+                            <div class="col-md-3">
                                 <nop-override-store-checkbox asp-for="SeoSettings.EnableJsBundling_OverrideForStore" asp-input="SeoSettings.EnableJsBundling" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />
                                 <nop-label asp-for="SeoSettings.EnableJsBundling" />
                             </div>

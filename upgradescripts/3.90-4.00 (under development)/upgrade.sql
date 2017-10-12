@@ -389,6 +389,12 @@ set @resources='
   <LocaleResource Name="Admin.Configuration.Plugins.Description.Step5">
     <Value></Value>
   </LocaleResource>
+  <LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.MoveInlineJsToFooter">
+    <Value>Move inline JavaScript to the footer</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.MoveInlineJsToFooter.Hint">
+    <Value>Enable to move inline JavaScript to the footer (in some cases a developer can decide to move it to the header). It allows to significantly increase site speed because usually inline scripts are render blocking.</Value>
+  </LocaleResource>
 </Language>
 '
 
@@ -842,5 +848,13 @@ IF NOT EXISTS (SELECT 1 FROM [ActivityLogType] WHERE [SystemKeyword] = N'DeleteP
 BEGIN
 	INSERT [ActivityLogType] ([SystemKeyword], [Name], [Enabled])
 	VALUES (N'DeletePlugin', N'Delete a plugin', N'true')
+END
+GO
+
+--new setting
+IF NOT EXISTS (SELECT 1 FROM [Setting] WHERE [name] = N'seosettings.moveinlinejstofooter')
+BEGIN
+	INSERT [Setting] ([Name], [Value], [StoreId])
+	VALUES (N'catalogsettings.moveinlinejstofooter', N'False', 0)
 END
 GO

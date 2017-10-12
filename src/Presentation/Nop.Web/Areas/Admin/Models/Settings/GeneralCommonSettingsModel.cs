@@ -171,6 +171,10 @@ namespace Nop.Web.Areas.Admin.Models.Settings
             public bool WwwRequirement_OverrideForStore { get; set; }
             public SelectList WwwRequirementValues { get; set; }
 
+            [NopResourceDisplayName("Admin.Configuration.Settings.GeneralCommon.MoveInlineJsToFooter")]
+            public bool MoveInlineJsToFooter { get; set; }
+            public bool MoveInlineJsToFooter_OverrideForStore { get; set; }
+
             [NopResourceDisplayName("Admin.Configuration.Settings.GeneralCommon.EnableJsBundling")]
             public bool EnableJsBundling { get; set; }
             public bool EnableJsBundling_OverrideForStore { get; set; }
