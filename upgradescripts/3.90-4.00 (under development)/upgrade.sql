@@ -855,6 +855,6 @@ GO
 IF NOT EXISTS (SELECT 1 FROM [Setting] WHERE [name] = N'seosettings.moveinlinejstofooter')
 BEGIN
 	INSERT [Setting] ([Name], [Value], [StoreId])
-	VALUES (N'catalogsettings.moveinlinejstofooter', N'False', 0)
+	VALUES (N'seosettings.moveinlinejstofooter', N'False', 0)
 END
 GO
