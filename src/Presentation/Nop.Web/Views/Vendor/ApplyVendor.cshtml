@@ -55,20 +55,22 @@
                         }
                         @if (Model.TermsOfServiceEnabled)
                         {
-                            <script type="text/javascript">
-                                $(document).ready(function() {
-                                    $('#apply-vendor').click(function() {
-                                        if ($('#accept-terms-of-service').is(':checked')) {
-                                            //do some stuff
-                                            return true;
-                                        } else {
-                                            //just show validation errors, dont post
-                                            alert('@Html.Raw(JavaScriptEncoder.Default.Encode(T("Vendors.ApplyAccount.AcceptTermsOfService.Required").Text))');
-                                            return false;
-                                        }
+                            <nop-inline-script asp-location="Foot">
+                                <script type="text/javascript">
+                                    $(document).ready(function() {
+                                        $('#apply-vendor').click(function() {
+                                            if ($('#accept-terms-of-service').is(':checked')) {
+                                                //do some stuff
+                                                return true;
+                                            } else {
+                                                //just show validation errors, dont post
+                                                alert('@Html.Raw(JavaScriptEncoder.Default.Encode(T("Vendors.ApplyAccount.AcceptTermsOfService.Required").Text))');
+                                                return false;
+                                            }
+                                        });
                                     });
-                                });
-                            </script>
+                                </script>
+                            </nop-inline-script>
                             <div class="accept-terms-of-service">
                                 <input id="accept-terms-of-service" type="checkbox" name="accept-terms-of-service" />
                                 <label for="accept-terms-of-service">@T("Vendors.ApplyAccount.AcceptTermsOfService")</label>

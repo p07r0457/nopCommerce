@@ -28,7 +28,8 @@
 }
 @if (Model.IsPasswordProtected)
 {
-    <script type="text/javascript">
+    <nop-inline-script asp-location="Foot">
+        <script type="text/javascript">
         $(document).ready(function () {
             $('#button-password').click(function () {
                 var postData = {
@@ -70,7 +71,8 @@
             $('#ph-topic').hide();
             $('#ph-password #password').select().focus();
         });
-    </script>
+        </script>
+    </nop-inline-script>
     <div class="topic-password" id="ph-password">
         <form asp-route="TopicAuthenticate" method="post">
             <input asp-for="Id" id="topic-@Model.Id" type="hidden" />

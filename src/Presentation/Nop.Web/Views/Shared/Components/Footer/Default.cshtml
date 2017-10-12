@@ -115,33 +115,35 @@
     </div>
     @await Component.InvokeAsync("Widget", new { widgetZone = "footer" })
 </div>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('.footer-block .title').click(function () {
-            var e = window, a = 'inner';
-            if (!('innerWidth' in window)) {
-                a = 'client';
-                e = document.documentElement || document.body;
-            }
-            var result = { width: e[a + 'Width'], height: e[a + 'Height'] };
-            if (result.width < 769) {
-                $(this).siblings('.list').slideToggle('slow');
-            }
+<nop-inline-script asp-location="Foot">
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.footer-block .title').click(function () {
+                var e = window, a = 'inner';
+                if (!('innerWidth' in window)) {
+                    a = 'client';
+                    e = document.documentElement || document.body;
+                }
+                var result = { width: e[a + 'Width'], height: e[a + 'Height'] };
+                if (result.width < 769) {
+                    $(this).siblings('.list').slideToggle('slow');
+                }
+            });
         });
-    });
-</script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('.block .title').click(function () {
-            var e = window, a = 'inner';
-            if (!('innerWidth' in window)) {
-                a = 'client';
-                e = document.documentElement || document.body;
-            }
-            var result = { width: e[a + 'Width'], height: e[a + 'Height'] };
-            if (result.width < 1001) {
-                $(this).siblings('.listbox').slideToggle('slow');
-            }
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.block .title').click(function () {
+                var e = window, a = 'inner';
+                if (!('innerWidth' in window)) {
+                    a = 'client';
+                    e = document.documentElement || document.body;
+                }
+                var result = { width: e[a + 'Width'], height: e[a + 'Height'] };
+                if (result.width < 1001) {
+                    $(this).siblings('.listbox').slideToggle('slow');
+                }
+            });
         });
-    });
-</script>
+    </script>
+</nop-inline-script>

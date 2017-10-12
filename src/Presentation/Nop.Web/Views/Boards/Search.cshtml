@@ -8,22 +8,24 @@
     //page class
     Html.AppendPageCssClassParts("html-forum-search-page");
 }
-<script type="text/javascript">
-    $(document).ready(function () {
-        toggleAdvancedSearch();
-        $('#adv').click(function () {
+<nop-inline-script asp-location="Foot">
+    <script type="text/javascript">
+        $(document).ready(function () {
             toggleAdvancedSearch();
+            $('#adv').click(function () {
+                toggleAdvancedSearch();
+            });
         });
-    });
-    function toggleAdvancedSearch() {
-        if ($('#adv').is(':checked')) {
-            $('#advanced-search').show();
+        function toggleAdvancedSearch() {
+            if ($('#adv').is(':checked')) {
+                $('#advanced-search').show();
+            }
+            else {
+                $('#advanced-search').hide();
+            }
         }
-        else {
-            $('#advanced-search').hide();
-        }
-    }
-</script>
+    </script>
+</nop-inline-script>
 @await Component.InvokeAsync("ForumBreadcrumb")
 <div class="page forum-search-page">
     <div class="page-title">

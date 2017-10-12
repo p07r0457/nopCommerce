@@ -27,57 +27,59 @@
         </div>
     </div>
     <div class="newsletter-result" id="newsletter-result-block"></div>
-    <script type="text/javascript">
-        function newsletter_subscribe(subscribe) {
-            var subscribeProgress = $("#subscribe-loading-progress");
-            subscribeProgress.show();
-            var postData = {
-                subscribe: subscribe,
-                email: $("#newsletter-email").val()
-            };
-            $.ajax({
-                cache: false,
-                type: "POST",
-                url: "@(Url.RouteUrl("SubscribeNewsletter"))",
-                data: postData,
-                success: function(data) {
-                    subscribeProgress.hide();
-                    $("#newsletter-result-block").html(data.Result);
-                    if (data.Success) {
-                        $('#newsletter-subscribe-block').hide();
-                        $('#newsletter-result-block').show();
-                    } else {
-                        $('#newsletter-result-block').fadeIn("slow").delay(2000).fadeOut("slow");
+    <nop-inline-script asp-location="Foot">
+        <script type="text/javascript">
+            function newsletter_subscribe(subscribe) {
+                var subscribeProgress = $("#subscribe-loading-progress");
+                subscribeProgress.show();
+                var postData = {
+                    subscribe: subscribe,
+                    email: $("#newsletter-email").val()
+                };
+                $.ajax({
+                    cache: false,
+                    type: "POST",
+                    url: "@(Url.RouteUrl("SubscribeNewsletter"))",
+                    data: postData,
+                    success: function(data) {
+                        subscribeProgress.hide();
+                        $("#newsletter-result-block").html(data.Result);
+                        if (data.Success) {
+                            $('#newsletter-subscribe-block').hide();
+                            $('#newsletter-result-block').show();
+                        } else {
+                            $('#newsletter-result-block').fadeIn("slow").delay(2000).fadeOut("slow");
+                        }
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {
+                        alert('Failed to subscribe.');
+                        subscribeProgress.hide();
                     }
-                },
-                error: function(xhr, ajaxOptions, thrownError) {
-                    alert('Failed to subscribe.');
-                    subscribeProgress.hide();
-                }
-            });
-        }
+                });
+            }
 
-        $(document).ready(function () {
-            $('#newsletter-subscribe-button').click(function () {
-                @if (Model.AllowToUnsubscribe)
-                {
-                    <text>if ($('#newsletter_subscribe').is(':checked')) {
+            $(document).ready(function () {
+                $('#newsletter-subscribe-button').click(function () {
+                    @if (Model.AllowToUnsubscribe)
+                    {
+                        <text>if ($('#newsletter_subscribe').is(':checked')) {
                         newsletter_subscribe('true');
                     } else {
                         newsletter_subscribe('false');
                     }</text>
-                }
-                else
-                {
-                    <text>newsletter_subscribe('true');</text>
-                }
+                    }
+                    else
+                    {
+                        <text>newsletter_subscribe('true');</text>
+                    }
+                });
+                $("#newsletter-email").keydown(function (event) {
+                    if (event.keyCode == 13) {
+                        $("#newsletter-subscribe-button").click();
+                        return false;
+                    }
+                });
             });
-            $("#newsletter-email").keydown(function (event) {
-                if (event.keyCode == 13) {
-                    $("#newsletter-subscribe-button").click();
-                    return false;
-                }
-            });
-        });
-    </script>
+        </script>
+    </nop-inline-script>
 </div>

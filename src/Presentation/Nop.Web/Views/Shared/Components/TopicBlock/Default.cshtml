@@ -1,47 +1,49 @@
 ﻿@model TopicModel
 @if (Model.IsPasswordProtected)
 {
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#button-password-@Model.Id').click(function() {
-                var postData = {
-                    id: $("#topic-@Model.Id").val(),
-                    password: $('#password-@Model.Id').val()
-                };
-                addAntiForgeryToken(postData);
+    <nop-inline-script asp-location="Foot">
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#button-password-@Model.Id').click(function() {
+                    var postData = {
+                        id: $("#topic-@Model.Id").val(),
+                        password: $('#password-@Model.Id').val()
+                    };
+                    addAntiForgeryToken(postData);
 
-                $.ajax({
-                    cache: false,
-                    type: 'POST',
-                    url: '@Url.RouteUrl("TopicAuthenticate")',
-                    data: postData,
-                    dataType: 'json',
-                    success: function(data) {
-                        if (data.Authenticated) {
-                            $('#ph-topic-@Model.Id #ph-title-@Model.Id h2').html(data.Title);
-                            if ($('#ph-topic-@Model.Id #ph-title-@Model.Id h2').text().length == 0) {
-                                $('#ph-title-@Model.Id').hide();
+                    $.ajax({
+                        cache: false,
+                        type: 'POST',
+                        url: '@Url.RouteUrl("TopicAuthenticate")',
+                        data: postData,
+                        dataType: 'json',
+                        success: function(data) {
+                            if (data.Authenticated) {
+                                $('#ph-topic-@Model.Id #ph-title-@Model.Id h2').html(data.Title);
+                                if ($('#ph-topic-@Model.Id #ph-title-@Model.Id h2').text().length == 0) {
+                                    $('#ph-title-@Model.Id').hide();
+                                }
+                                $('#ph-topic-@Model.Id .topic-block-body').html(data.Body);
+                                $('#ph-password-@Model.Id').hide();
+                                $('#ph-topic-@Model.Id').show();
+                                //we need to re-run the validation plugin after the content is loaded after successful authentication
+                                $.validator.unobtrusive.parse('#ph-topic-@Model.Id');
+                            } else {
+                                $('#password-error-@Model.Id').text(data.Error).fadeIn("slow");
+                                $('#ph-password-@Model.Id #password-@Model.Id').select().focus();
                             }
-                            $('#ph-topic-@Model.Id .topic-block-body').html(data.Body);
-                            $('#ph-password-@Model.Id').hide();
-                            $('#ph-topic-@Model.Id').show();
-                            //we need to re-run the validation plugin after the content is loaded after successful authentication
-                            $.validator.unobtrusive.parse('#ph-topic-@Model.Id');
-                        } else {
-                            $('#password-error-@Model.Id').text(data.Error).fadeIn("slow");
-                            $('#ph-password-@Model.Id #password-@Model.Id').select().focus();
                         }
-                    }
+                    });
+                    return false;
                 });
-                return false;
             });
-        });
 
-        $(document).ready(function() {
-            $('#ph-topic-@Model.Id').hide();
-            $('#ph-password-@Model.Id #password-@Model.Id').select().focus();
-        });
-    </script>
+            $(document).ready(function() {
+                $('#ph-topic-@Model.Id').hide();
+                $('#ph-password-@Model.Id #password-@Model.Id').select().focus();
+            });
+        </script>
+    </nop-inline-script>
     <div class="topic-password" id="ph-password-@Model.Id">
         <form asp-route="TopicAuthenticate" method="post">
             <input asp-for="Id" id="topic-@Model.Id" type="hidden"/>

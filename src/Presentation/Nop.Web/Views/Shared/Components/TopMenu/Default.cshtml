@@ -96,14 +96,16 @@
         }
         @await Component.InvokeAsync("Widget", new { widgetZone = "mob_header_menu_after" })
     </ul>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('.menu-toggle').click(function () {
-                $(this).siblings('.top-menu.mobile').slideToggle('slow');
+    <nop-inline-script asp-location="Foot">
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('.menu-toggle').click(function () {
+                    $(this).siblings('.top-menu.mobile').slideToggle('slow');
+                });
+                $('.top-menu.mobile .sublist-toggle').click(function () {
+                    $(this).siblings('.sublist').slideToggle('slow');
+                });
             });
-            $('.top-menu.mobile .sublist-toggle').click(function () {
-                $(this).siblings('.sublist').slideToggle('slow');
-            });
-        });
-    </script>
+        </script>
+    </nop-inline-script>
 }

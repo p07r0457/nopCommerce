@@ -15,11 +15,13 @@
 }
 @if (Model.PrintMode)
 {
-    <script type="text/javascript">
-        $(document).ready(function () {
-            window.print();
-        });
-    </script>
+    <nop-inline-script asp-location="Foot">
+        <script type="text/javascript">
+            $(document).ready(function () {
+                window.print();
+            });
+        </script>
+    </nop-inline-script>
 }
 <div class="page order-details-page">
     @if (!Model.PrintMode)

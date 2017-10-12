@@ -55,14 +55,13 @@
             {
             <mini-profiler />
         }
+        @Html.NopInlineScripts(this.Url, ResourceLocation.Head)
         <!--Powered by nopCommerce - http://www.nopCommerce.com-->
-        <nop-inline-script-location asp-name="Head" />
     </head>
     <body>
         @RenderBody()
         @Html.NopCssFiles(this.Url, ResourceLocation.Foot)
         @Html.NopScripts(this.Url, ResourceLocation.Foot)
-        <nop-inline-script-location asp-name="Footer" />
+        @Html.NopInlineScripts(this.Url, ResourceLocation.Foot)
     </body>
 </html>
-</nop-inline-script-manager>

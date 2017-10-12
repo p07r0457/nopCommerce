@@ -1,18 +1,20 @@
 ﻿@model PrivateMessageListModel 
 <div class="private-messages-box">
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#select-all-inbox').click(function () {
-                $('#pm-inbox-table .rowcheckbox').attr('checked', $(this).is(':checked')).change();
-            });
+    <nop-inline-script asp-location="Foot">
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#select-all-inbox').click(function () {
+                    $('#pm-inbox-table .rowcheckbox').attr('checked', $(this).is(':checked')).change();
+                });
 
-            $('#pm-inbox-table .rowcheckbox').on('change', function (e) {
-                var numChkBoxes = $('#pm-inbox-table .rowcheckbox').length;
-                var numChkBoxesChecked = $('#pm-inbox-table .rowcheckbox:checked').length;
-                $('#select-all-inbox').attr('checked', numChkBoxes == numChkBoxesChecked && numChkBoxes > 0);
+                $('#pm-inbox-table .rowcheckbox').on('change', function (e) {
+                    var numChkBoxes = $('#pm-inbox-table .rowcheckbox').length;
+                    var numChkBoxesChecked = $('#pm-inbox-table .rowcheckbox:checked').length;
+                    $('#select-all-inbox').attr('checked', numChkBoxes == numChkBoxesChecked && numChkBoxes > 0);
+                });
             });
-        });
-    </script>
+        </script>
+    </nop-inline-script>
     @if (Model.Messages.Count > 0)
     {
         <form asp-route="PrivateMessagesInbox" method="post">

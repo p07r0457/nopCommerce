@@ -24,30 +24,32 @@
             @if (Model.IsCustomerAllowedToDeleteTopic)
             {
                 <a href="#" class="delete-topic-button" onclick="return deletetopic(@(Model.Id))">@T("Forum.DeleteTopic").Text</a>
-                <script type="text/javascript">
-                    function deletetopic(topicId) {
-                        if (confirm('@T("Common.AreYouSure")')) {
-                            var postData = {
-                                id: topicId
-                            };
-                            addAntiForgeryToken(postData);
-                            $.ajax({
-                                cache: false,
-                                type: 'POST',
-                                url: '@Url.Action("TopicDelete", "Boards")',
-                                data: postData,
-                                dataType: 'json',
-                                success: function(data) {
-                                    location.href = data.redirect;
-                                },
-                                error: function(xhr, ajaxOptions, thrownError) {
-                                    alert('Failed to delete');
-                                }
-                            });
+                <nop-inline-script asp-location="Foot">
+                    <script type="text/javascript">
+                        function deletetopic(topicId) {
+                            if (confirm('@T("Common.AreYouSure")')) {
+                                var postData = {
+                                    id: topicId
+                                };
+                                addAntiForgeryToken(postData);
+                                $.ajax({
+                                    cache: false,
+                                    type: 'POST',
+                                    url: '@Url.Action("TopicDelete", "Boards")',
+                                    data: postData,
+                                    dataType: 'json',
+                                    success: function(data) {
+                                        location.href = data.redirect;
+                                    },
+                                    error: function(xhr, ajaxOptions, thrownError) {
+                                        alert('Failed to delete');
+                                    }
+                                });
+                            }
+                            return false;
                         }
-                        return false;
-                    }
-                </script>
+                    </script>
+                </nop-inline-script>
             }
             @if (Model.IsCustomerAllowedToMoveTopic)
             {
@@ -57,25 +59,27 @@
             @if (Model.IsCustomerAllowedToSubscribe)
             {
                 <a class="watch-topic-button" href="#" id="watch-topic-top">@Model.WatchTopicText</a>
-                <script type="text/javascript">
-                    $(document).ready(function () {
-                        $('#watch-topic-top').click(function () {
-                            $.ajax({
-                                cache: false,
-                                type: 'POST',
-                                url: '@Url.RouteUrl("TopicWatch", new { id = Model.Id })',
-                                dataType: 'json',
-                                success: function (data) {
-                                    $('#watch-topic-top').text(data.Text);
-                                    $('#watch-topic-bottom').text(data.Text);
-                                },
-                                error: function (xhr, ajaxOptions, thrownError) {
-                                    alert('Failed to watch');
-                                }
+                <nop-inline-script asp-location="Foot">
+                    <script type="text/javascript">
+                        $(document).ready(function () {
+                            $('#watch-topic-top').click(function () {
+                                $.ajax({
+                                    cache: false,
+                                    type: 'POST',
+                                    url: '@Url.RouteUrl("TopicWatch", new { id = Model.Id })',
+                                    dataType: 'json',
+                                    success: function (data) {
+                                        $('#watch-topic-top').text(data.Text);
+                                        $('#watch-topic-bottom').text(data.Text);
+                                    },
+                                    error: function (xhr, ajaxOptions, thrownError) {
+                                        alert('Failed to watch');
+                                    }
+                                });
                             });
                         });
-                    });
-                </script>
+                    </script>
+                </nop-inline-script>
             }
         </div>
         @{
@@ -112,29 +116,31 @@
             @if (Model.IsCustomerAllowedToSubscribe)
             {
                 <a class="watch-topic-button" href="#" id="watch-topic-bottom">@Model.WatchTopicText</a>
-                <script type="text/javascript">
-                    $(document).ready(function() {
-                        $('#watch-topic-bottom').click(function() {
-                            var postData = {};
-                            addAntiForgeryToken(postData);
+                <nop-inline-script asp-location="Foot">
+                    <script type="text/javascript">
+                        $(document).ready(function() {
+                            $('#watch-topic-bottom').click(function() {
+                                var postData = {};
+                                addAntiForgeryToken(postData);
 
-                            $.ajax({
-                                cache: false,
-                                type: 'POST',
-                                url: '@Url.RouteUrl("TopicWatch", new {id = Model.Id})',
-                                data: postData,
-                                dataType: 'json',
-                                success: function(data) {
-                                    $('#watch-topic-top').text(data.Text);
-                                    $('#watch-topic-bottom').text(data.Text);
-                                },
-                                error: function(xhr, ajaxOptions, thrownError) {
-                                    alert('Failed to watch');
-                                }
+                                $.ajax({
+                                    cache: false,
+                                    type: 'POST',
+                                    url: '@Url.RouteUrl("TopicWatch", new {id = Model.Id})',
+                                    data: postData,
+                                    dataType: 'json',
+                                    success: function(data) {
+                                        $('#watch-topic-top').text(data.Text);
+                                        $('#watch-topic-bottom').text(data.Text);
+                                    },
+                                    error: function(xhr, ajaxOptions, thrownError) {
+                                        alert('Failed to watch');
+                                    }
+                                });
                             });
                         });
-                    });
-                </script>
+                    </script>
+                </nop-inline-script>
             }
         </div>
         @if (!String.IsNullOrEmpty(pager.ToHtmlString()))
@@ -146,7 +152,8 @@
     </div>
     @await Component.InvokeAsync("Widget", new { widgetZone = "boards_topic_bottom", additionalData = Model.Id })
 </div>
-<script type="text/javascript">
+<nop-inline-script asp-location="Foot">
+    <script type="text/javascript">
     function deletepost(postId) {
         if (confirm('@T("Common.AreYouSure")')) {
             var postData = {
@@ -169,4 +176,5 @@
         }
         return false;
     }
-</script>
+    </script>
+</nop-inline-script>

@@ -11,33 +11,35 @@
     <span id="helpfulness-vote-result-@(Model.ProductReviewId)" class="result"></span>
 
     
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#vote-yes-@(Model.ProductReviewId)').click(function () {
-                setProductReviewHelpfulness@(Model.ProductReviewId)('true');
+    <nop-inline-script asp-location="Foot">
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#vote-yes-@(Model.ProductReviewId)').click(function () {
+                    setProductReviewHelpfulness@(Model.ProductReviewId)('true');
+                });
+                $('#vote-no-@(Model.ProductReviewId)').click(function () {
+                    setProductReviewHelpfulness@(Model.ProductReviewId)('false');
+                });
             });
-            $('#vote-no-@(Model.ProductReviewId)').click(function () {
-                setProductReviewHelpfulness@(Model.ProductReviewId)('false');
-            });
-        });
 
-        function setProductReviewHelpfulness@(Model.ProductReviewId)(wasHelpful){
+            function setProductReviewHelpfulness@(Model.ProductReviewId)(wasHelpful){
                 $.ajax({
                     cache: false,
                     type: "POST",
                     url: "@(Url.RouteUrl("SetProductReviewHelpfulness"))",
                     data: { "productReviewId": @(Model.ProductReviewId), "washelpful": wasHelpful },
                     success: function (data) {
-                         $("#helpfulness-vote-yes-@(Model.ProductReviewId)").html(data.TotalYes);
-                         $("#helpfulness-vote-no-@(Model.ProductReviewId)").html(data.TotalNo);
-                         $("#helpfulness-vote-result-@(Model.ProductReviewId)").html(data.Result);
+                        $("#helpfulness-vote-yes-@(Model.ProductReviewId)").html(data.TotalYes);
+                        $("#helpfulness-vote-no-@(Model.ProductReviewId)").html(data.TotalNo);
+                        $("#helpfulness-vote-result-@(Model.ProductReviewId)").html(data.Result);
                                                   
-                         $('#helpfulness-vote-result-@(Model.ProductReviewId)').fadeIn("slow").delay(1000).fadeOut("slow");
+                        $('#helpfulness-vote-result-@(Model.ProductReviewId)').fadeIn("slow").delay(1000).fadeOut("slow");
                     },
                     error:function (xhr, ajaxOptions, thrownError){
                         alert('Failed to vote. Please refresh the page and try one more time.');
                     }  
                 });
-        }
-    </script>
+            }
+        </script>
+    </nop-inline-script>
 </div>

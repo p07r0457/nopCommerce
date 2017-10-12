@@ -10,33 +10,35 @@
 }
 @if (Model.CountryEnabled && Model.StateProvinceEnabled)
 {
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#@Html.IdFor(model => model.CountryId)").change(function () {
-                var selectedItem = $(this).val();
-                var ddlStates = $("#@Html.IdFor(model => model.StateProvinceId)");
-                var statesProgress = $("#states-loading-progress");
-                statesProgress.show();
-                $.ajax({
-                    cache: false,
-                    type: "GET",
-                    url: "@(Url.RouteUrl("GetStatesByCountryId"))",
-                    data: { "countryId": selectedItem, "addSelectStateItem": "true" },
-                    success: function (data) {
-                        ddlStates.html('');
-                        $.each(data, function (id, option) {
-                            ddlStates.append($('<option></option>').val(option.id).html(option.name));
-                        });
-                        statesProgress.hide();
-                    },
-                    error: function (xhr, ajaxOptions, thrownError) {
-                        alert('Failed to retrieve states.');
-                        statesProgress.hide();
-                    }
+    <nop-inline-script asp-location="Foot">
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#@Html.IdFor(model => model.CountryId)").change(function () {
+                    var selectedItem = $(this).val();
+                    var ddlStates = $("#@Html.IdFor(model => model.StateProvinceId)");
+                    var statesProgress = $("#states-loading-progress");
+                    statesProgress.show();
+                    $.ajax({
+                        cache: false,
+                        type: "GET",
+                        url: "@(Url.RouteUrl("GetStatesByCountryId"))",
+                        data: { "countryId": selectedItem, "addSelectStateItem": "true" },
+                        success: function (data) {
+                            ddlStates.html('');
+                            $.each(data, function (id, option) {
+                                ddlStates.append($('<option></option>').val(option.id).html(option.name));
+                            });
+                            statesProgress.hide();
+                        },
+                        error: function (xhr, ajaxOptions, thrownError) {
+                            alert('Failed to retrieve states.');
+                            statesProgress.hide();
+                        }
+                    });
                 });
             });
-        });
-    </script>
+        </script>
+    </nop-inline-script>
 }
 <div class="page registration-page">
     <div class="page-title">
@@ -352,21 +354,23 @@
                 </div>
                 @if (Model.AcceptPrivacyPolicyEnabled)
                 {
-                    <script type="text/javascript">
-                    $(document).ready(function() {
-                        $('#register-button').click(function() {
-                            if ($('#accept-privacy-policy').is(':checked')) {
-                                //do some stuff
-                                return true;
-                            } else {
-                                //just show validation errors, dont post
-                                alert(
-                                    '@Html.Raw(JavaScriptEncoder.Default.Encode(T("Account.Fields.AcceptPrivacyPolicy.Required").Text))');
-                                return false;
-                            }
-                        });
-                    });
-                    </script>
+                    <nop-inline-script asp-location="Foot">
+                        <script type="text/javascript">
+                            $(document).ready(function() {
+                                $('#register-button').click(function() {
+                                    if ($('#accept-privacy-policy').is(':checked')) {
+                                        //do some stuff
+                                        return true;
+                                    } else {
+                                        //just show validation errors, dont post
+                                        alert(
+                                            '@Html.Raw(JavaScriptEncoder.Default.Encode(T("Account.Fields.AcceptPrivacyPolicy.Required").Text))');
+                                        return false;
+                                    }
+                                });
+                            });
+                        </script>
+                    </nop-inline-script>
                     <div class="accept-privacy-policy">
                         <input id="accept-privacy-policy" type="checkbox" name="accept-privacy-policy" />
                         <label for="accept-privacy-policy">@T("Account.Fields.AcceptPrivacyPolicy")</label>

@@ -1,4 +1,5 @@
-﻿<script type="text/javascript">
+﻿<nop-inline-script asp-location="Foot">
+    <script type="text/javascript">
     $(document).ready(function () {
         $('#check-availability-button').before('<span id="username-availabilty"></span>');
         $('#Username').bind({
@@ -41,6 +42,7 @@
             return false;
         });
     });
-</script>
+    </script>
+</nop-inline-script>
 <input type="button" id="check-availability-button" class="button-2 check-username-availability-button" value="@T("Account.CheckUsernameAvailability.Button")" />
 <span id="availability-check-progress" style="display: none;" class="please-wait">@T("Common.Wait...")</span>

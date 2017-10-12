@@ -22,21 +22,22 @@
             <div class="description">
                 @T("Account.BackInStockSubscriptions.Description")
             </div>
-            <script type="text/javascript">
-                $(document).ready(function () {
+            <nop-inline-script asp-location="Foot">
+                <script type="text/javascript">
+                    $(document).ready(function () {
 
-                    $('#selectall').click(function () {
-                        $('.subscription-list .rowcheckbox').attr('checked', $(this).is(':checked')).change();
-                    });
+                        $('#selectall').click(function () {
+                            $('.subscription-list .rowcheckbox').attr('checked', $(this).is(':checked')).change();
+                        });
 
-                    $('.subscription-list .rowcheckbox').on('change', function (e) {
-                        var numChkBoxes = $('.subscription-list .rowcheckbox').length;
-                        var numChkBoxesChecked = $('.subscription-list .rowcheckbox:checked').length;
-                        $('#selectall').attr('checked', numChkBoxes == numChkBoxesChecked && numChkBoxes > 0);
+                        $('.subscription-list .rowcheckbox').on('change', function (e) {
+                            var numChkBoxes = $('.subscription-list .rowcheckbox').length;
+                            var numChkBoxesChecked = $('.subscription-list .rowcheckbox:checked').length;
+                            $('#selectall').attr('checked', numChkBoxes == numChkBoxesChecked && numChkBoxes > 0);
+                        });
                     });
-                });
-            </script>
-            
+                </script>
+            </nop-inline-script>
             <form asp-route="CustomerBackInStockSubscriptions" method="post">
                 <div class="subscription-list">
                     <div class="table-wrapper">
