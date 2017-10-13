@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using Nop.Core.Infrastructure;
+using Nop.Core.Domain.Seo;
 
 namespace Nop.Web.Framework.UI
 {
@@ -126,7 +127,13 @@ namespace Nop.Web.Framework.UI
         public static void AddScriptParts(this IHtmlHelper html, string src, string debugSrc = "",
             bool excludeFromBundle = false, bool isAsync = false)
         {
-            AddScriptParts(html, ResourceLocation.Head, src, debugSrc, excludeFromBundle, isAsync);
+            var location = ResourceLocation.Head;
+
+            var seoSettings = EngineContext.Current.Resolve<SeoSettings>();
+            if (seoSettings.MoveInlineJsToFooter)
+                location = ResourceLocation.Foot;
+
+            AddScriptParts(html, location, src, debugSrc, excludeFromBundle, isAsync);
         }
         /// <summary>
         /// Add script element
@@ -154,7 +161,13 @@ namespace Nop.Web.Framework.UI
         public static void AppendScriptParts(this IHtmlHelper html, string src, string debugSrc = "",
             bool excludeFromBundle = false, bool isAsync = false)
         {
-            AppendScriptParts(html, ResourceLocation.Head, src, debugSrc, excludeFromBundle, isAsync);
+            var location = ResourceLocation.Head;
+
+            var seoSettings = EngineContext.Current.Resolve<SeoSettings>();
+            if (seoSettings.MoveInlineJsToFooter)
+                location = ResourceLocation.Foot;
+
+            AppendScriptParts(html, location, src, debugSrc, excludeFromBundle, isAsync);
         }
         /// <summary>
         /// Append script element
