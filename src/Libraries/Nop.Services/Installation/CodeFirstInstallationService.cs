@@ -5903,7 +5903,7 @@ namespace Nop.Services.Installation
                 CanonicalUrlsEnabled = false,
                 QueryStringInCanonicalUrlsEnabled = false,
                 WwwRequirement = WwwRequirement.NoMatter,
-                MoveInlineJsToFooter = false,
+                MoveJsToFooter = false,
                 //we disable bundling out of the box because it requires a lot of server resources
                 EnableJsBundling = false,
                 EnableCssBundling = false,

@@ -66,7 +66,7 @@ namespace Nop.Core.Domain.Seo
         /// <summary>
         /// A value indicating whether inline scripts should be moved to the footer
         /// </summary>
-        public bool MoveInlineJsToFooter { get; set; }
+        public bool MoveJsToFooter { get; set; }
 
         /// <summary>
         /// A value indicating whether JS file bundling and minification is enabled

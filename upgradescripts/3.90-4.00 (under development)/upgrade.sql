@@ -389,11 +389,11 @@ set @resources='
   <LocaleResource Name="Admin.Configuration.Plugins.Description.Step5">
     <Value></Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.MoveInlineJsToFooter">
-    <Value>Move inline JavaScript to the footer</Value>
+  <LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.MoveJsToFooter">
+    <Value>Move JavaScript to the footer</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.MoveInlineJsToFooter.Hint">
-    <Value>Enable to move inline JavaScript to the footer (in some cases a developer can decide to move it to the header). It allows to significantly increase site speed because usually inline scripts are render blocking.</Value>
+  <LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.MoveJsToFooter.Hint">
+    <Value>Enable to move JavaScript to the footer (in some cases a developer can decide to move it to the header). It allows to significantly increase site speed because usually scripts are render blocking.</Value>
   </LocaleResource>
 </Language>
 '
@@ -852,9 +852,9 @@ END
 GO
 
 --new setting
-IF NOT EXISTS (SELECT 1 FROM [Setting] WHERE [name] = N'seosettings.moveinlinejstofooter')
+IF NOT EXISTS (SELECT 1 FROM [Setting] WHERE [name] = N'seosettings.movejstofooter')
 BEGIN
 	INSERT [Setting] ([Name], [Value], [StoreId])
-	VALUES (N'seosettings.moveinlinejstofooter', N'False', 0)
+	VALUES (N'seosettings.movejstofooter', N'False', 0)
 END
 GO

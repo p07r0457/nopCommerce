@@ -130,7 +130,7 @@ namespace Nop.Web.Framework.UI
             var location = ResourceLocation.Head;
 
             var seoSettings = EngineContext.Current.Resolve<SeoSettings>();
-            if (seoSettings.MoveInlineJsToFooter)
+            if (seoSettings.MoveJsToFooter)
                 location = ResourceLocation.Foot;
 
             AddScriptParts(html, location, src, debugSrc, excludeFromBundle, isAsync);
@@ -164,7 +164,7 @@ namespace Nop.Web.Framework.UI
             var location = ResourceLocation.Head;
 
             var seoSettings = EngineContext.Current.Resolve<SeoSettings>();
-            if (seoSettings.MoveInlineJsToFooter)
+            if (seoSettings.MoveJsToFooter)
                 location = ResourceLocation.Foot;
 
             AppendScriptParts(html, location, src, debugSrc, excludeFromBundle, isAsync);

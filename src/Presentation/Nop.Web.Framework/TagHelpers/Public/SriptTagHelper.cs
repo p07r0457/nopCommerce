@@ -47,7 +47,7 @@ namespace Nop.Web.Framework.TagHelpers.Public
                 throw new ArgumentNullException(nameof(output));
             }
 
-            if (!_seoSettings.MoveInlineJsToFooter)
+            if (!_seoSettings.MoveJsToFooter)
             {
                 return;
             }
